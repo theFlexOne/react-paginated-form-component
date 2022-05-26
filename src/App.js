@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles.css";
+import PaginatedForm from "./components/PaginatedForm/PaginatedForm";
+import FormStep from "./components/FormStep/FormStep";
+import TextField from "./components/TextField/TextField";
+import SelectMenu from "./components/SelectMenu/SelectMenu";
+import { STATES } from "./helpers/constants";
 
-function App() {
+const statesList = STATES.map((state) => {
+  return { value: state.name, label: state.code };
+});
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PaginatedForm>
+        <FormStep>
+          <TextField
+            id="firstName"
+            className="first_name"
+            placeholder="first_name"
+          />
+          <TextField
+            id="lastName"
+            className="last_name"
+            placeholder="last_name"
+          />
+        </FormStep>
+        <FormStep>
+          <TextField id="streetAddress" placeholder="street address" />
+          <TextField id="secondaryAddress" placeholder="secondary address" />
+          <TextField id="city" className="city" placeholder="city" />
+          <SelectMenu id="state" options={statesList} />
+        </FormStep>
+        <FormStep></FormStep>
+      </PaginatedForm>
     </div>
   );
 }
-
-export default App;
